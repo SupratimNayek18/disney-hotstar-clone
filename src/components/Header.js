@@ -43,7 +43,7 @@ export default function Header() {
           <span>SERIES</span>
         </a>
       </NavMenu>
-      <Login onClick={handleAuth}>Login</Login>
+      <Login onClick={handleAuth}>Sign In</Login>
     </Nav>
   );
 }

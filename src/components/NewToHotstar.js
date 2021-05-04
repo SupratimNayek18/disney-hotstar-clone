@@ -1,44 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectNewDisney } from "../features/movie/movieSlice";
 
 function NewToHotstar() {
+  const movies = useSelector(selectNewDisney);
   return (
     <Container>
       <h4>New To Disney+ Hotstar</h4>
       <Content>
-        <Wrap>
-          <Link to="/">
-            <img
-              src="https://i0.wp.com/www.investrecords.com/wp-content/uploads/2020/09/Disney-Hotstar-Hostages-Season-2-.jpg?fit=660%2C353&ssl=1"
-              alt=""
-            />
-          </Link>
-        </Wrap>
-        <Wrap>
-          <Link to="/">
-            <img
-              src="https://i.pinimg.com/736x/aa/30/93/aa3093c534e0308ff87c81ab6b0852b5.jpg"
-              alt=""
-            />
-          </Link>
-        </Wrap>
-        <Wrap>
-          <Link to="/">
-            <img
-              src="https://mypostercollection.com/wp-content/uploads/2018/08/Frozen-Poster-15.jpg"
-              alt=""
-            />
-          </Link>
-        </Wrap>
-        <Wrap>
-          <Link to="/">
-            <img
-              src="https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/3896/953896-h"
-              alt=""
-            />
-          </Link>
-        </Wrap>
+        {movies &&
+          movies.map((movie, key) => (
+            <Wrap key={key}>
+              {movie.id}
+              <Link to={"/detail/" + movie.id}>
+                <img src={movie.cardImg} alt={movie.title} />
+              </Link>
+            </Wrap>
+          ))}
       </Content>
     </Container>
   );
@@ -71,6 +51,7 @@ const Wrap = styled.div`
   transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
   border: 3px solid rgba(249, 249, 249, 0.1);
   img {
+    inset: 0px;
     height: 100%;
     width: 100%;
     object-fit: cover;
